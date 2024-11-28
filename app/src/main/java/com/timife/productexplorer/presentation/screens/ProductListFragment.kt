@@ -1,6 +1,7 @@
 package com.timife.productexplorer.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ import com.timife.productexplorer.presentation.utils.Utils
 import com.timife.productexplorer.presentation.viewmodels.ProductListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
+private const val TAG = "ProductListFragment"
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
@@ -49,6 +52,7 @@ class ProductListFragment : Fragment() {
                 when (state) {
                     is ProductUiState.Loading -> {
                         // Show loading state
+                        Log.d(TAG, "onCreateView: loading")
                         binding.progressBar.visibility = View.VISIBLE
                     }
 
@@ -60,6 +64,7 @@ class ProductListFragment : Fragment() {
                     is ProductUiState.Error -> {
                         // Show error state
                         Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
+                        Utils.showSnackbar(binding.root, state.error)
                         binding.progressBar.visibility = View.GONE
                     }
                 }
