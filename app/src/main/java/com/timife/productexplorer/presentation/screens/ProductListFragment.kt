@@ -1,5 +1,6 @@
 package com.timife.productexplorer.presentation.screens
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.productexplorer.databinding.FragmentProductListBinding
 import com.timife.productexplorer.presentation.adapters.ProductListAdapter
@@ -43,7 +45,7 @@ class ProductListFragment : Fragment() {
                 )
             }
         )
-        recyclerView.adapter = adapter
+        setUpRecyclerView()
 
         lifecycleScope.launch {
             viewModel.uiState.collect {state ->
@@ -72,5 +74,20 @@ class ProductListFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun setUpRecyclerView() {
+        // Detect the current orientation
+        val orientation = resources.configuration.orientation
+        val spanCount = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 3 else 2
+
+        val gridLayoutManager = GridLayoutManager(requireContext(), spanCount)
+        recyclerView.layoutManager = gridLayoutManager
+        recyclerView.adapter = adapter
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        setUpRecyclerView()
     }
 }
