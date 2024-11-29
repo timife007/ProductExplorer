@@ -83,17 +83,16 @@ dependencies {
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
     testImplementation(libs.coroutine.test)
     testImplementation(libs.junit)
     testImplementation(libs.core.test)
     testImplementation(libs.truth)
     testImplementation(libs.turbine)
     testImplementation(libs.mockk)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.core.test)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.coroutine.test)
 }

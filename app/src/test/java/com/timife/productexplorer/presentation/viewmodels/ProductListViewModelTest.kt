@@ -43,7 +43,7 @@ class ProductListViewModelTest {
 
     @Test
     fun `getProducts emits Loading and Success states`() = runTest {
-        // Mock the use case to return a flow emitting Loading and Success
+        // Mocks the use case to return a flow emitting Loading and Success
         val mockData = productList.map {
             it.toProduct()
         }
@@ -55,10 +55,9 @@ class ProductListViewModelTest {
         viewModel = ProductListViewModel(getAllProductsUC)
 
         viewModel.uiState.test {
-            // Check the initial state is Loading
             assert(awaitItem() is ProductUiState.Loading)
 
-            // Check that Success state is emitted with mock data
+            // Checks that Success state is emitted with mock data
             val successState = awaitItem()
             assert(successState is ProductUiState.Success)
             assert((successState as ProductUiState.Success).products == mockData)
@@ -69,7 +68,7 @@ class ProductListViewModelTest {
 
     @Test
     fun `getProducts emits Loading and Error states`() = runTest {
-        // Mock the use case to return a flow emitting Loading and Error
+        // Mocks the use case to return a flow emitting Loading and Error
         val errorMessage = "Error occurred"
         coEvery { getAllProductsUC() } returns flowOf(
             Resource.Loading(),
@@ -79,10 +78,9 @@ class ProductListViewModelTest {
         viewModel = ProductListViewModel(getAllProductsUC)
 
         viewModel.uiState.test {
-            // Check the initial state is Loading
             assert(awaitItem() is ProductUiState.Loading)
 
-            // Check that Error state is emitted with correct message
+            // Checks that Error state is emitted with correct message
             val errorState = awaitItem()
             assert(errorState is ProductUiState.Error)
             assert((errorState as ProductUiState.Error).error == errorMessage)
@@ -93,7 +91,7 @@ class ProductListViewModelTest {
 
     @Test
     fun `getProducts emits Loading and Error states when data is null`() = runTest {
-        // Mock the use case to return a flow emitting Loading and Success with null data
+        // Mocks the use case to return a flow emitting Loading and Success with null data
         coEvery { getAllProductsUC() } returns flowOf(
             Resource.Loading(),
             Resource.Success(null)
@@ -102,10 +100,10 @@ class ProductListViewModelTest {
         viewModel = ProductListViewModel(getAllProductsUC)
 
         viewModel.uiState.test {
-            // Check the initial state is Loading
+            // Checks the initial state is Loading
             assert(awaitItem() is ProductUiState.Loading)
 
-            // Check that Error state is emitted for null data
+            // Checks that Error state is emitted for null data
             val errorState = awaitItem()
             assert(errorState is ProductUiState.Error)
             assert((errorState as ProductUiState.Error).error == "No item found")
