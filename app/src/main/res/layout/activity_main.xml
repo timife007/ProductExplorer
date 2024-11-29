@@ -14,8 +14,16 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:elevation="3dp"
+            android:minHeight="?attr/actionBarSize"
+            android:ellipsize="none"
+            android:singleLine="false"
+            android:lineSpacingExtra="4dp"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    android:lineSpacingMultiplier="1.2"
             app:title="My Title"
+            app:titleTextAppearance="@style/TitleTextAppearance"
             app:titleTextColor="@color/black"/>
 
     </com.google.android.material.appbar.AppBarLayout>

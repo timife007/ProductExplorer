@@ -1,6 +1,7 @@
 package com.timife.productexplorer.presentation.utils
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
@@ -12,13 +13,14 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.timife.productexplorer.R
+import com.timife.productexplorer.domain.model.Messages
 
 object Utils {
     fun loadImage(
         context: Context,
         imageView: ImageView,
         imageUrl: String,
-        progressBar: View
+        progressBar: View,
     ) {
         // request listener to manage loading states
         val listener = object : RequestListener<Drawable> {
@@ -26,7 +28,7 @@ object Utils {
                 e: GlideException?,
                 model: Any?,
                 target: Target<Drawable>,
-                isFirstResource: Boolean
+                isFirstResource: Boolean,
             ): Boolean {
                 progressBar.visibility = View.GONE
                 imageView.visibility = View.VISIBLE
@@ -38,7 +40,7 @@ object Utils {
                 model: Any,
                 target: Target<Drawable>?,
                 dataSource: DataSource,
-                isFirstResource: Boolean
+                isFirstResource: Boolean,
             ): Boolean {
                 // visibility management when loading is complete
                 progressBar.visibility = View.GONE
@@ -66,9 +68,10 @@ object Utils {
         message: String,
         duration: Int = Snackbar.LENGTH_LONG,
         actionText: String? = null,
-        action: (() -> Unit)? = null
+        action: (() -> Unit)? = null,
     ) {
         val snackbar = Snackbar.make(view, message, duration)
+            .setBackgroundTint(Color.parseColor(Messages.SNACKBAR_COLOR))
 
         if (actionText != null && action != null) {
             snackbar.setAction(actionText) {
@@ -77,6 +80,4 @@ object Utils {
         }
         snackbar.show()
     }
-
-
 }

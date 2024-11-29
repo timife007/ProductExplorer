@@ -50,7 +50,8 @@ class ProductDetailsFragment : Fragment() {
                             title.text = state.data.title
                             description.text = state.data.description
                             rating.text =
-                                String.format(Locale.getDefault(), "%.1f", state.data.rating)
+                                String.format(Locale.getDefault(),
+                                    getString(R.string._1f), state.data.rating)
                             reviews.text = getString(R.string._no_of_reviews, state.data.review)
                         }
                     }

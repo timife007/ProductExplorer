@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.timife.productexplorer.databinding.FragmentProductListBinding
 import com.timife.productexplorer.presentation.adapters.ProductListAdapter
 import com.timife.productexplorer.presentation.navigation.ProductDetails
@@ -52,19 +51,22 @@ class ProductListFragment : Fragment() {
                 when (state) {
                     is ProductUiState.Loading -> {
                         // Show loading state
-                        Log.d(TAG, "onCreateView: loading")
                         binding.progressBar.visibility = View.VISIBLE
+                        binding.errorText.visibility = View.GONE
+
                     }
 
                     is ProductUiState.Success -> {
                         adapter.submitList(state.products)
                         binding.progressBar.visibility = View.GONE
+                        binding.errorText.visibility = View.GONE
                     }
 
                     is ProductUiState.Error -> {
                         // Show error state
-                        Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
                         Utils.showSnackbar(binding.root, state.error)
+                        binding.errorText.visibility = View.VISIBLE
+                        binding.errorText.text = state.error
                         binding.progressBar.visibility = View.GONE
                     }
                 }

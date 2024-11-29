@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="CustomSnackbarStyle" parent="Widget.MaterialComponents.Snackbar">
+    <!-- Background color -->
+    <item name="backgroundTint">@color/grey</item>
+    <!-- Text color -->
+    <item name="android:textColor">@color/white</item>
+    <!-- Corner radius (optional) -->
+</style>
+    <style name="TitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
+        <!-- Customize text size -->
+        <item name="android:textSize">20sp</item>
+        <!-- Text color (optional, you can also set this directly in the toolbar) -->
+        <item name="android:textColor">@color/black</item>
+        <!-- Letter spacing (optional) -->
+        <item name="android:letterSpacing">0.05</item>
+        <!-- Text style (optional) -->
+        <item name="android:textStyle">bold</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:ellipsize">none</item>
+    </style>
+</resources>

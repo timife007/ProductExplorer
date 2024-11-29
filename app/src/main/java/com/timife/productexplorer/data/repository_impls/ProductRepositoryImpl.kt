@@ -5,6 +5,7 @@ import com.timife.productexplorer.data.mappers.toProduct
 import com.timife.productexplorer.data.mappers.toProductEntity
 import com.timife.productexplorer.data.remote.services.ProductsApiService
 import com.timife.productexplorer.domain.Resource
+import com.timife.productexplorer.domain.model.Messages
 import com.timife.productexplorer.domain.model.Product
 import com.timife.productexplorer.domain.repositories.ProductRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
     private val productsApiService: ProductsApiService,
-    private val dao: CacheDao
+    private val dao: CacheDao,
 ) : ProductRepository {
 
     override fun getProducts(): Flow<Resource<List<Product>>> {
@@ -33,14 +34,14 @@ class ProductRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 // emit error on exception
-                emit(Resource.Error(e.message))
+                emit(Resource.Error(Messages.UNKNOWN_ERROR))
             }
             // Get products from local database
             val products = dao.getAllProducts().map { item ->
                 item.toProduct()
             }
             if (products.isEmpty()) {
-                emit(Resource.Error("No products found"))
+                emit(Resource.Error(Messages.NO_PRODUCTS_FOUND))
             } else {
                 emit(Resource.Success(products)) // Emit success with product list
             }
@@ -56,12 +57,12 @@ class ProductRepositoryImpl @Inject constructor(
                 val product = dao.getProductById(productId)?.toProduct()
 
                 if (product == null) {
-                    emit(Resource.Error("Product not found"))
+                    emit(Resource.Error(Messages.PRODUCT_NOT_FOUND))
                 } else {
                     emit(Resource.Success(product))
                 }
             } catch (e: Exception) {
-                emit(Resource.Error(e.message))
+                emit(Resource.Error(Messages.UNKNOWN_ERROR))
             }
         }.flowOn(Dispatchers.IO)
     }

@@ -20,7 +20,7 @@ data class ProductDetails(
 fun navigationGraph(navController: NavController): NavGraph {
     return navController.createGraph(startDestination = ProductList){
         fragment<ProductListFragment, ProductList>{
-            label = "Discover Products"
+            label = "Discover \nProducts"
         }
         fragment<ProductDetailsFragment, ProductDetails>{
             label = "Product Details"
