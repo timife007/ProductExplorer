@@ -2,9 +2,7 @@ package com.timife.productexplorer.data.mappers
 
 import com.timife.productexplorer.data.local.entities.ProductEntity
 import com.timife.productexplorer.data.remote.models.ProductDto
-import com.timife.productexplorer.data.remote.models.RatingDto
 import com.timife.productexplorer.domain.model.Product
-import com.timife.productexplorer.domain.model.Rating
 
 
 fun ProductDto.toProductEntity(): ProductEntity {
