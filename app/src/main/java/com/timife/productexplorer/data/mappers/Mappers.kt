@@ -20,28 +20,8 @@ fun ProductDto.toProductEntity(): ProductEntity {
     )
 }
 
-fun RatingDto.toRating(): Rating {
-    return Rating(
-        rate = rate ?: 0.0,
-        count = count ?: 0
-    )
-}
-
 fun ProductEntity.toProduct(): Product {
     return Product(
-        id = id,
-        title = title,
-        price = price,
-        description = description,
-        category = category,
-        image = image,
-        rating = rating,
-        review = review
-    )
-}
-
-fun Product.toProductEntity(): ProductEntity {
-    return ProductEntity(
         id = id,
         title = title,
         price = price,

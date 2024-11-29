@@ -20,10 +20,10 @@ class ProductListAdapter(private val onItemClickListener:(id:Int) -> Unit) : Lis
 
                 // Load the image using loadImage function from Utils
                 Utils.loadImage(
-                    binding.productImage.context,
-                    binding.productImage,
-                    product.image, // Image URL from the product
-                    binding.imageProgressBar // Pass the ProgressBar for visibility
+                    context = binding.productImage.context,
+                    imageView = binding.productImage,
+                    imageUrl = product.image, // Image URL from the product
+                    progressBar = binding.imageProgressBar // Pass the ProgressBar for visibility
                 )
 
                 binding.root.setOnClickListener {

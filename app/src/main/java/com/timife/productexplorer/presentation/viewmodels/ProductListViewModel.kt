@@ -3,6 +3,7 @@ package com.timife.productexplorer.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.timife.productexplorer.domain.Resource
+import com.timife.productexplorer.domain.model.Messages
 import com.timife.productexplorer.domain.usecases.GetAllProductsUC
 import com.timife.productexplorer.presentation.ui_states.ProductUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +35,7 @@ class ProductListViewModel @Inject constructor(
 
                     is Resource.Error -> {
                         _uiState.value =
-                            ProductUiState.Error(it.message ?: "Unknown error occurred")
+                            ProductUiState.Error(it.message ?: Messages.UNKNOWN_ERROR)
                     }
 
                     is Resource.Success -> {
@@ -42,7 +43,7 @@ class ProductListViewModel @Inject constructor(
                             _uiState.value =
                                 ProductUiState.Success(it.data)
                         }else{
-                            _uiState.value = ProductUiState.Error("No item found")
+                            _uiState.value = ProductUiState.Error(Messages.NO_PRODUCTS_FOUND)
                         }
                     }
                 }

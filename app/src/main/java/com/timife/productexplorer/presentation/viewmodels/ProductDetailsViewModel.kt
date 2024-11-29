@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.timife.productexplorer.domain.Resource
+import com.timife.productexplorer.domain.model.Messages
 import com.timife.productexplorer.domain.usecases.GetSingleProductUC
 import com.timife.productexplorer.presentation.ui_states.DetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,7 @@ class ProductDetailsViewModel @Inject constructor(
 
 
     init {
-        getProduct(savedStateHandle.getStateFlow("productId",- 1).value)
+        getProduct(savedStateHandle.getStateFlow(Messages.PRODUCT_ID,- 1).value)
     }
 
     private fun getProduct(id: Int) {
@@ -37,7 +38,7 @@ class ProductDetailsViewModel @Inject constructor(
 
                     is Resource.Error -> {
                         _detailState.value =
-                            DetailUiState.Error(it.message ?: "Unknown error occurred")
+                            DetailUiState.Error(it.message ?: Messages.UNKNOWN_ERROR)
                     }
 
                     is Resource.Success -> {
